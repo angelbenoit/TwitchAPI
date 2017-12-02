@@ -1,0 +1,14 @@
+body{
+    text-align: center;
+}
+
+#status{
+    border: 1px solid black;
+    float: right;
+}
+
+#topPart{
+    padding-left: 15%;
+    padding-right: 15%;
+
+}
