@@ -3,12 +3,32 @@ body{
 }
 
 #status{
-    border: 1px solid black;
-    float: right;
+
 }
 
 #topPart{
     padding-left: 15%;
     padding-right: 15%;
-
+    margin-bottom: 0;
+    background: #b067e0;
+    color: white;
 }
+
+#online,
+#all,
+#offline
+{
+    background: #9b18f2;
+    color: white;
+    border: none;
+}
+#online:hover,
+#all:hover,
+#offline:hover{
+    background: #cd82ff;
+}
+
+#status{
+    background: #9b18f2;
+}
+

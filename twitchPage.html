@@ -10,30 +10,32 @@
     <div><!--whole box-->
 
         <div class="container jumbotron" id="topPart">
-            <div class="row">
-                <h1 class="col-xs-3">Twitch Streamers</h1>
-
-                <div id="status" class="col-xs-3"> <!--filters all, online, or offline?-->
-                    <div id="all">dog
-                    </div>
-                    <div id="online">dog
-                    </div>
-                    <div id="offline">dog
-                    </div>
-                </div>
-            </div>
-
+                <h1>Twitch Streamers</h1>
         </div>
 
-
-        <div id="userInfo"> <!-- user info from left to right including icon, username, and title of stream -->
-            <div id="image"> <!-- profile picture of the user -->dog
-            </div>
-            <div id="userName">dog
-            </div>
-            <div id="title"> <!-- if user is offline, then title will be "offline" -->dog
-            </div>
+    <div class="container">
+        <div id="status" class="row"> <!--filters all, online, or offline?-->
+            <button id="all" class="col-xs-4 btn btn-default">ALL
+            </button>
+            <button id="online" class="col-xs-4 btn btn-default">ONLINE
+            </button>
+            <button id="offline" class="col-xs-4 btn btn-default">OFFLINE
+            </button>
         </div>
+    </div>
+
+
+    <div class="container">
+        <div id="userInfo" class="row"> <!-- user info from left to right including icon, username, and title of stream -->
+            <span id="image" class="col-sm-4"> <!-- profile picture of the user -->dog
+            </span>
+            <span id="userName" class="col-sm-4"> dog
+            </span>
+            <span id="title" class="col-sm-4"> <!-- if user is offline, then title will be "offline" -->dog
+            </span>
+        </div>
+    </div>
+
 
     </div>
 
