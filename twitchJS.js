@@ -12,6 +12,11 @@
     to get image of icon for users who are offline, the image wont be show up in /streams/:stream link
     if user is offline.
     "logo" will give us the icon whether user is online of offline
+    
+    
+    UPDATE:
+    twtich api client key is epbr8ttvcdj3ox68n97j6q4u20jqyd
+    this client key can be used with updated twitch api
  */
 
 $(document).ready(function () {
