@@ -36,11 +36,13 @@ $(document).ready(function () {
     var userNames = [];
     //this array will get the icon links from the followingsObjectArray
     var userIcons = [];
+    //this linkArray will get us the link to each user's page
+    var linkArray = [];
     //this array will get us the title of their stream if they're online,
     //if offline, we display "offline"
     var userStatus = [];
 
-    var linkArray = [];
+
 
 
 
@@ -57,10 +59,13 @@ $(document).ready(function () {
                 userIcons[i] = followingsObjectArray[i].logo;
                 //console.log(userNames[i] + " " + userIcons[i]);
             }
+            getFollowsStatusURL(userNames);
         });
+
     }
 
-    function getFollowsStatus() {
+    //this function gets the array of urls to each followings with their status, whether offline or online
+    function getFollowsStatusURL(nameList) {
         //create array of links for each user that freecodecamp is following
         //then get the json to using streams url in order to get whether they're online or offline
         //then get the title of the stream if they're online
@@ -68,9 +73,14 @@ $(document).ready(function () {
         var link2 = "?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
 
 
-        for(var i = 0; i < userNames.length; i++){
-            linkArray[i] = link1 + userNames[i] + link2;
+        for(var i = 0; i < nameList.length; i++){
+            linkArray[i] = link1 + nameList[i] + link2;
         }
+
+    }
+
+    //this function will give us the array of info determining if the user is online or offline, and if online, get their title
+    function getFollowingsStatus(statusLinkArray) {
 
     }
 
@@ -94,8 +104,8 @@ $(document).ready(function () {
     }
 
     getFollowsInfo();
-    getFollowsStatus();
     console.log(linkArray);
+
 
 });
 
