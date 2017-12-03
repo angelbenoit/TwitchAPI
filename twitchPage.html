@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <title>Twitch TV API</title>
     <link rel="stylesheet" href="twitchCSS.css">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
     <div><!--whole box-->
 
         <div class="container jumbotron" id="topPart">
-                <h1>Twitch Streamers</h1>
+                <h1>
+                    <img id="twitchIcon" src="https://cdn1.iconfinder.com/data/icons/simple-icons/4096/twitch-4096-black.png">
+                    Twitch Streamers
+                </h1>
         </div>
 
     <div class="container">
@@ -27,11 +31,11 @@
 
     <div class="container">
         <div id="userInfo" class="row"> <!-- user info from left to right including icon, username, and title of stream -->
-            <span id="image" class="col-sm-4"> <!-- profile picture of the user -->dog
+            <span id="image" class="col-sm-4"> <!-- profile picture of the user -->
             </span>
-            <span id="userName" class="col-sm-4"> dog
+            <span id="userName" class="col-sm-4">
             </span>
-            <span id="title" class="col-sm-4"> <!-- if user is offline, then title will be "offline" -->dog
+            <span id="title" class="col-sm-4"> <!-- if user is offline, then title will be "offline" -->
             </span>
         </div>
     </div>
@@ -39,6 +43,8 @@
 
     </div>
 
+
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="twitchJS.js"></script>
 </body>
