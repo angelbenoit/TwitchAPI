@@ -122,19 +122,20 @@ $(document).ready(function () {
     console.log(userStatus);
 
     function placeInfo() {
+        var HTMLArray = [];
         for(var i = 0; i < userNames.length; i++){
-            $(".userInfo").append(
-                "<div>"+
-                    "<span class='userName col-sm-4'>"+
-                    userNames[i]+
-                    "</span>"+
+            $("#box").append(
+                "<div class='row userInfo'>"+
 
-                    "<span class='col-sm-4'>" +
+                    "<span class='col-sm-4 img'>" +
                         "<img  class='image' src='" + userIcons[i] + "'"+
                     "</span>"+
 
+                    "<span class='col-sm-4 userName'>"+
+                    userNames[i]+
+                    "</span>"+
 
-                    "<span class='userName col-sm-4'>"+
+                    "<span class='col-sm-4 title'>"+
                     userStatus[i]+
                     "</span>"+
                 "</div>"
