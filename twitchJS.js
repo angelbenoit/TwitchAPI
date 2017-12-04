@@ -42,27 +42,33 @@ $(document).ready(function () {
     //if offline, we display "offline"
     var userStatus = [];
 
+    var processedIcons = [];
 
-
-
-
-
+    //===========================================================================================//
+    /*
+    These following methods will fill the userNames, userIcons, linkArray and userStatus arrays
+    We use the getFollowsInfo() method to get the usernames and links to the icons of the users whom freecodecamp is following
+    in that same mathod, we will call the getFollowsStatusURL() method, which will get the streamURL of each user in the userNames array
+    That method will call getFollowingsStatus() method which will give us the array that will tell us whether user is online or offline
+     */
 
     function getFollowsInfo() {
         $.getJSON(urlFollows, function (result) {
             //console.log(result + "test");
             //console.log(result.follows[1].user + "test");
 
-            for(var i = 0; i < result.follows.length; i++){
+            for (var i = 0; i < result.follows.length; i++) {
                 followingsObjectArray[i] = result.follows[i].user;
                 userNames[i] = followingsObjectArray[i].display_name;
                 userIcons[i] = followingsObjectArray[i].logo;
                 //console.log(userNames[i] + " " + userIcons[i]);
             }
             getFollowsStatusURL(userNames);
+            placeInfo();
         });
 
     }
+
 
     //this function gets the array of urls to each followings with their status, whether offline or online
     function getFollowsStatusURL(nameList) {
@@ -73,30 +79,38 @@ $(document).ready(function () {
         var link2 = "?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
 
 
-        for(var i = 0; i < nameList.length; i++){
+        for (var i = 0; i < nameList.length; i++) {
             linkArray[i] = link1 + nameList[i] + link2;
         }
+
+        getFollowingsStatus(linkArray);
 
     }
 
     //this function will give us the array of info determining if the user is online or offline, and if online, get their title
     function getFollowingsStatus(statusLinkArray) {
+        for (var i = 0; i < statusLinkArray.length; i++) {
 
+            $.getJSON(statusLinkArray[i], function (result) {
+                //console.log(result.stream);
+                userStatus.push(result.stream);
+            })
+
+        }
     }
 
-
-
-
+    //ends here
+    //===================================================================================================================
 
 
     function getFreeCodeCampStatus() {
         $.getJSON(urlStream, function (result) {
             var status = result.stream;
 
-            if(status === null){
+            if (status === null) {
                 //console.log("gs");
             }
-            else{
+            else {
                 //console.log(status);
             }
 
@@ -105,6 +119,30 @@ $(document).ready(function () {
 
     getFollowsInfo();
     console.log(linkArray);
+    console.log(userStatus);
+
+    function placeInfo() {
+        for(var i = 0; i < userNames.length; i++){
+            $(".userInfo").append(
+                "<div>"+
+                    "<span class='userName col-sm-4'>"+
+                    userNames[i]+
+                    "</span>"+
+
+                    "<span class='col-sm-4'>" +
+                        "<img  class='image' src='" + userIcons[i] + "'"+
+                    "</span>"+
+
+
+                    "<span class='userName col-sm-4'>"+
+                    userStatus[i]+
+                    "</span>"+
+                "</div>"
+            )
+        }
+    }
+
+
 
 
 });
