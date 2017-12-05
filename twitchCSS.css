@@ -31,6 +31,7 @@ body{
     background: #9b18f2;
     color: white;
     border: none;
+    font-family: 'Barlow Condensed', sans-serif;
 }
 #online:hover,
 #all:hover,
@@ -44,18 +45,20 @@ body{
 
 #userInfo{
     background: #fcdcff;
-
+    font-family: 'Barlow Condensed', sans-serif;
 }
 
 .userInfoBackground{
     background: #fcdcff;
-    border: .5px solid red;
+    border: .5px solid #a418ff;
 
 }
 
 .userName{
-
     height: 50px;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 25px;
 }
 
 .image{
@@ -70,4 +73,7 @@ body{
 
 .title{
     height: 50px;
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 25px;
 }
