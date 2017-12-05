@@ -42,25 +42,20 @@ body{
     background: #9b18f2;
 }
 
-#userInfo{
+.userInfo{
+    border: 1px solid #a9a9a9;
     background: #fcdcff;
-}
-
-.userInfoBackground{
-    background: #fcdcff;
-    border: .5px solid red;
 }
 
 .userName{
-    height: 50px;
+    margin-right: 0;
 }
 
 .image{
     width: 50px;
-    height: 50px;
 }
 
 .title{
-    height: 50px;
+
 }
 
