@@ -42,20 +42,32 @@ body{
     background: #9b18f2;
 }
 
-.userInfo{
-    border: 1px solid #a9a9a9;
+#userInfo{
     background: #fcdcff;
+
+}
+
+.userInfoBackground{
+    background: #fcdcff;
+    border: .5px solid red;
+
 }
 
 .userName{
-    margin-right: 0;
+
+    height: 50px;
 }
 
 .image{
     width: 50px;
+
+}
+
+.image{
+    width: 50px;
+    height: 50px;
 }
 
 .title{
-
+    height: 50px;
 }
-

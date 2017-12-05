@@ -42,7 +42,6 @@ $(document).ready(function () {
     //if offline, we display "offline"
     var userStatus = [];
 
-    var processedIcons = [];
 
     //===========================================================================================//
     /*
@@ -122,23 +121,22 @@ $(document).ready(function () {
     console.log(userStatus);
 
     function placeInfo() {
+
         for(var i = 0; i < userNames.length; i++){
-            $(".userInfo").append(
-                "<div>"+
-                    "<span class='userName col-sm-4'>"+
-                    userNames[i]+
-                    "</span>"+
 
-                    "<span class='col-sm-4'>" +
-                        "<img  class='image' src='" + userIcons[i] + "'"+
-                    "</span>"+
-
-
-                    "<span class='userName col-sm-4'>"+
-                    userStatus[i]+
-                    "</span>"+
+            $("#userInfo").append(
+                "<div class='row userInfoBackground'>"+
+                "<span class='col-md-4 userName'>"+
+                userNames[i]+
+                "</span>"+
+                "<span class='col-md-4 title'>"+
+                userStatus[i]+
+                "</span>"+
+                "<span class='col-md-4'>"+
+                "<img class='image' src='" + userIcons[i] + "'>"+
+                "</span>"+
                 "</div>"
-            )
+            );
         }
     }
 
