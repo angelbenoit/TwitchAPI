@@ -1,5 +1,5 @@
 /*
-    use: https://api.twitch.tv/kraken/users/freecodecamp?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd
+    use: https://api.twitch.tv/kraken/streams/freecodecamp?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd
     to figure out if the user is online
     if "stream" === null, then it means the user is offline
     otherwise, "stream" will contain information about the livestream like what games
@@ -28,10 +28,10 @@ $(document).ready(function () {
     //this link gives us the list of people who freecodecamp is following
     var urlFollows = "https://api.twitch.tv/kraken/channels/freecodecamp/follows?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
 
+
     //this array will hold the json object of the users freecodecamp is following
     //it will hold information like display name and logo link
     var followingsObjectArray = [];
-
     //this array will get the display names from the followingsObjectArray
     var userNames = [];
     //this array will get the icon links from the followingsObjectArray
@@ -79,46 +79,83 @@ $(document).ready(function () {
 
 
         for (var i = 0; i < nameList.length; i++) {
-            linkArray[i] = link1 + nameList[i] + link2;
+            linkArray.push(link1 + nameList[i] + link2);
+            //console.log(linkArray[i]);
         }
 
-        getFollowingsStatus(linkArray);
+        getFollowingsStatus(linkArray, userStatus);
 
     }
 
     //this function will give us the array of info determining if the user is online or offline, and if online, get their title
-    function getFollowingsStatus(statusLinkArray) {
+    function getFollowingsStatus(statusLinkArray, statusArray) {
+        console.log(statusLinkArray);
         for (var i = 0; i < statusLinkArray.length; i++) {
 
             $.getJSON(statusLinkArray[i], function (result) {
-                //console.log(result.stream);
-                userStatus.push(result.stream);
-            })
 
+                if(result.stream === null || result.stream === undefined){
+                    userStatus.push("Offline");
+                    console.log("OFFLINE")
+                }
+                else{
+                    statusArray.push(result.stream);
+                }
+
+            });
         }
     }
 
     //ends here
     //===================================================================================================================
 
+    function getFreeCodeCamp() {
+        var name = "";
+        var pic = "";
+        var link = "https://api.twitch.tv/kraken/users/freecodecamp?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
+
+
+        $.getJSON(link, function (result) {
+            var status = getFreeCodeCampStatus();
+            name = result.display_name;
+            pic = result.logo;
+            console.log(name + "\n" + pic);
+
+            $("#userInfo").append(
+                "<div class='row userInfoBackground'>"+
+                "<span class='col-xs-4 userName'>"+
+                name+
+                "</span>"+
+                "<span class='col-xs-4 title'>"+
+                status+
+                "</span>"+
+                "<span class='col-xs-4'>"+
+                "<img class='image' src='" + pic + "'>"+
+                "</span>"+
+                "</div>"
+            );
+        });
+
+
+    }
 
     function getFreeCodeCampStatus() {
+        var test;
         $.getJSON(urlStream, function (result) {
             var status = result.stream;
 
             if (status === null) {
-                //console.log("gs");
+                test = "false";
+                console.log(test);
+                return test;
             }
-            else {
-                //console.log(status);
+            else{
+                return result.stream;
             }
+        });
 
-        })
     }
 
-    getFollowsInfo();
-    console.log(linkArray);
-    console.log(userStatus);
 
     function placeInfo() {
 
@@ -126,19 +163,26 @@ $(document).ready(function () {
 
             $("#userInfo").append(
                 "<div class='row userInfoBackground'>"+
-                "<span class='col-md-4 userName'>"+
+                "<span class='col-xs-4 userName'>"+
                 userNames[i]+
                 "</span>"+
-                "<span class='col-md-4 title'>"+
+                "<span class='col-xs-4 title'>"+
                 userStatus[i]+
                 "</span>"+
-                "<span class='col-md-4'>"+
+                "<span class='col-xs-4'>"+
                 "<img class='image' src='" + userIcons[i] + "'>"+
                 "</span>"+
                 "</div>"
             );
         }
     }
+
+
+    getFreeCodeCamp();
+    getFollowsInfo();
+    // console.log(linkArray);
+    //console.log(userStatus);
+
 
 
 
