@@ -63,7 +63,7 @@ $(document).ready(function () {
                 //console.log(userNames[i] + " " + userIcons[i]);
             }
             getFollowsStatusURL(userNames);
-            placeInfo();
+
         });
 
     }
@@ -103,10 +103,54 @@ $(document).ready(function () {
                 }
 
             });
+            //placeInfo(userNames[i], userStatus[i], userIcons[i]);
         }
     }
 
     //ends here
+    //===================================================================================================================
+    //===================================================================================================================
+    //Buttons section
+    getFollowsInfo();
+    getFreeCodeCamp();
+
+    $("#all").on("click", function () {
+        getAll();
+    });
+
+    $("#online").click( function () {
+        getOnline();
+    });
+
+    $("#offline").click(function () {
+        getOffline();
+    });
+
+    function getAll() {
+        $("#userInfo").empty();
+        for(var i = 0; i < userStatus.length; i++){
+                placeInfo(userNames[i], userStatus[i], userIcons[i]);
+        }
+    }
+
+    function getOnline() {
+        $("#userInfo").empty();
+        for(var i = 0; i < userStatus.length; i++){
+            if(userStatus[i] !== null){
+                placeInfo(userNames[i], userStatus[i], userIcons[i]);
+            }
+        }
+    }
+
+    function getOffline() {
+        $("#userInfo").empty();
+        for(var i = 0; i < userStatus.length; i++){
+            if(userStatus[i] === null){
+                placeInfo(userNames[i], "OFFLINE", userIcons[i]);
+            }
+        }
+    }
+
     //===================================================================================================================
 
     function getFreeCodeCamp() {
@@ -120,8 +164,7 @@ $(document).ready(function () {
             name = result.display_name;
             pic = result.logo;
             console.log(name + "\n" + pic);
-
-            $("#userInfo").append(
+            $("#userInfo2").append(
                 "<div class='row userInfoBackground'>"+
                 "<span class='col-xs-4 userName'>"+
                 name+
@@ -157,29 +200,29 @@ $(document).ready(function () {
     }
 
 
-    function placeInfo() {
+    function placeInfo(name, status, icon) {
 
-        for(var i = 0; i < userNames.length; i++){
+        //for(var i = 0; i < userNames.length; i++){
 
             $("#userInfo").append(
                 "<div class='row userInfoBackground'>"+
                 "<span class='col-xs-4 userName'>"+
-                userNames[i]+
+                name+
                 "</span>"+
                 "<span class='col-xs-4 title'>"+
-                userStatus[i]+
+                status+
                 "</span>"+
                 "<span class='col-xs-4'>"+
-                "<img class='image' src='" + userIcons[i] + "'>"+
+                "<img class='image' src='" + icon + "'>"+
                 "</span>"+
                 "</div>"
             );
-        }
+        //}
     }
 
 
-    getFreeCodeCamp();
-    getFollowsInfo();
+
+
     // console.log(linkArray);
     //console.log(userStatus);
 
