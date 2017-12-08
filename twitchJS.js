@@ -22,18 +22,19 @@ That method will call getFollowingsStatus() method which will give us the array 
  */
 
 function getFollowsInfo() {
-    $.getJSON(urlFollows, function (result) {
 
-        for (var i = 0; i < result.follows.length; i++) {
-            followingsObjectArray[i] = result.follows[i];
-            userNames[i] = followingsObjectArray[i].channel.display_name;
-            userIcons[i] = followingsObjectArray[i].channel.logo;
+    $.ajax({
+        url: urlFollows,
+        dataType: 'json',
+        success: function (result) {
+            for (var i = 0; i < result.follows.length; i++) {
+                followingsObjectArray[i] = result.follows[i];
+                userNames[i] = followingsObjectArray[i].channel.display_name;
+                userIcons[i] = followingsObjectArray[i].channel.logo;
+            }
+            getFollowsStatusURL(userNames);
         }
-
-        getFollowsStatusURL(userNames);
     });
-
-
 }
 
 
