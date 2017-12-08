@@ -1,5 +1,5 @@
 //this link gives us the list of people who freecodecamp is following
-var urlFollows = "https://api.twitch.tv/kraken/channels/freecodecamp/follows?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
+var urlFollows = "https://api.twitch.tv/kraken/users/freecodecamp/follows/channels?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
 
 //this array will hold the json object of the users freecodecamp is following
 //it will hold information like display name and logo link
@@ -25,9 +25,9 @@ function getFollowsInfo() {
     $.getJSON(urlFollows, function (result) {
 
         for (var i = 0; i < result.follows.length; i++) {
-            followingsObjectArray[i] = result.follows[i].user;
-            userNames[i] = followingsObjectArray[i].display_name;
-            userIcons[i] = followingsObjectArray[i].logo;
+            followingsObjectArray[i] = result.follows[i];
+            userNames[i] = followingsObjectArray[i].channel.display_name;
+            userIcons[i] = followingsObjectArray[i].channel.logo;
         }
 
         getFollowsStatusURL(userNames);
@@ -39,46 +39,47 @@ function getFollowsInfo() {
 
 //this function gets the array of urls to each followings with their status, whether offline or online
 function getFollowsStatusURL(nameList) {
-    console.log(nameList);
 
     var link1 = "https://api.twitch.tv/kraken/streams/";
     var link2 = "?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
 
-    for(var j = 0; j < nameList.length; j++){
-        console.log("TEST");
+    for (var j = 0; j < nameList.length; j++) {
         var url = link1 + nameList[j] + link2;
-        $.getJSON(url, function (result) {
 
-            if(result.stream === null || result.stream === undefined){
-                userStatus.push("OFFLINE");
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+                if (data.stream === null || data.stream === undefined) {
+                    console.log(data.stream);
+                    userStatus.push("OFFLINE");
+                }
+                else {
+                    userStatus.push(data.stream);
+                }
             }
-            else{
-                userStatus.push(result.stream);
-            }
-
         });
-
     }
-
 }
 
 
 function placeInfo(name, status, icon) {
 
     $("#userInfo").append(
-        "<div class='row userInfoBackground'>"+
-        "<span class='col-xs-4 userName'>"+
-        name+
-        "</span>"+
-        "<span class='col-xs-4 title'>"+
-        status+
-        "</span>"+
-        "<span class='col-xs-4'>"+
-        "<img class='image' src='" + icon + "'>"+
-        "</span>"+
+        "<div class='row userInfoBackground'>" +
+        "<span class='col-xs-4 userName'>" +
+        name +
+        "</span>" +
+        "<span class='col-xs-4 title'>" +
+        status +
+        "</span>" +
+        "<span class='col-xs-4'>" +
+        "<img class='image' src='" + icon + "'>" +
+        "</span>" +
         "</div>"
     );
 }
+
 //=================================================================================
 //buttons section
 
@@ -86,7 +87,7 @@ $("#all").on("click", function () {
     getAll();
 });
 
-$("#online").click( function () {
+$("#online").click(function () {
     getOnline();
 });
 
@@ -96,15 +97,15 @@ $("#offline").click(function () {
 
 function getAll() {
     $("#userInfo").empty();
-    for(var i = 0; i < userStatus.length; i++){
+    for (var i = 0; i < userStatus.length; i++) {
         placeInfo(userNames[i], userStatus[i], userIcons[i]);
     }
 }
 
 function getOnline() {
     $("#userInfo").empty();
-    for(var i = 0; i < userStatus.length; i++){
-        if(userStatus[i] !== "OFFLINE"){
+    for (var i = 0; i < userStatus.length; i++) {
+        if (userStatus[i] !== "OFFLINE") {
             placeInfo(userNames[i], userStatus[i], userIcons[i]);
         }
     }
@@ -112,8 +113,8 @@ function getOnline() {
 
 function getOffline() {
     $("#userInfo").empty();
-    for(var i = 0; i < userStatus.length; i++){
-        if(userStatus[i] === "OFFLINE"){
+    for (var i = 0; i < userStatus.length; i++) {
+        if (userStatus[i] === "OFFLINE") {
             placeInfo(userNames[i], "OFFLINE", userIcons[i]);
         }
     }
@@ -121,6 +122,7 @@ function getOffline() {
 
 //===================================================================================================================
 var freeCodeCampSTATUS;
+
 function getFreeCodeCamp() {
     var name = "";
     var pic = "";
@@ -132,16 +134,16 @@ function getFreeCodeCamp() {
         name = result.display_name;
         pic = result.logo;
         $("#userInfo2").append(
-            "<div class='row userInfoBackground'>"+
-            "<span class='col-xs-4 userName'>"+
-            name+
-            "</span>"+
-            "<span class='col-xs-4 title'>"+
-            freeCodeCampSTATUS+
-            "</span>"+
-            "<span class='col-xs-4'>"+
-            "<img class='image' src='" + pic + "'>"+
-            "</span>"+
+            "<div class='row userInfoBackground'>" +
+            "<span class='col-xs-4 userName'>" +
+            name +
+            "</span>" +
+            "<span class='col-xs-4 title'>" +
+            freeCodeCampSTATUS +
+            "</span>" +
+            "<span class='col-xs-4'>" +
+            "<img class='image' src='" + pic + "'>" +
+            "</span>" +
             "</div>"
         );
     });
@@ -151,17 +153,19 @@ function getFreeCodeCamp() {
 
 function getFreeCodeCampStatus() {
     var urlStream = "https://api.twitch.tv/kraken/streams/freecodecamp?client_id=epbr8ttvcdj3ox68n97j6q4u20jqyd";
-    $.getJSON(urlStream, function (result) {
-        var status = result.stream;
-
-        if (status) {
-            freeCodeCampSTATUS = status;
-        }
-        else{
-            freeCodeCampSTATUS = "OFFLINE";
+    $.ajax({
+        url: urlStream,
+        dataType: 'json',
+        success: function (data) {
+            if(data.stream === null){
+                freeCodeCampSTATUS = "OFFLINE";
+                console.log("freecodecamp status is offline");
+            }
+            else{
+                freeCodeCampSTATUS = data.stream;
+            }
         }
     });
-
 }
 
 
