@@ -11,9 +11,6 @@ body{
     width: 35%;
 }
 
-#status{
-
-}
 
 #topPart{
     padding-left: 15%;
@@ -24,11 +21,13 @@ body{
     font-family: 'Barlow Condensed', sans-serif;
 }
 
+
+/*Buttons Section*/
 #online,
 #all,
 #offline
 {
-    background: #9b18f2;
+    background: #aa57e0;
     color: white;
     border: none;
     font-family: 'Barlow Condensed', sans-serif;
@@ -38,38 +37,13 @@ body{
 #offline:hover{
     background: #cd82ff;
 }
+/*end buttons section*/
 
-
-
-#status{
-    background: #9b18f2;
-}
-
-#userInfo{
-    background: #fcdcff;
-    font-family: 'Barlow Condensed', sans-serif;
-}
-#userInfo2{
-    background: #fcdcff;
-    font-family: 'Barlow Condensed', sans-serif;
-}
-
-.userInfoBackground{
-    background: #fcdcff;
-    border: .5px solid #a418ff;
-
-}
-
+/*Information about twitch user*/
 .userName{
-    height: 50px;
+    height: 100%;
     padding-top: 5px;
-    font-weight: bold;
     font-size: 25px;
-}
-
-.image{
-    width: 50px;
-
 }
 
 .image{
@@ -78,8 +52,45 @@ body{
 }
 
 .title{
-    height: 50px;
+    height: 100%;
+    padding-top: 5px;
+    font-size: 25px;
+}
+
+.hrefText{
+    text-decoration: none;
+    color: white;
+}
+
+#userInfo{
+    background: #aa57e0;
+    font-family: 'Barlow Condensed', sans-serif;
+}
+
+
+.userInfoBackground{
+    background: #9c52cf;
+    color: white;
+    border-bottom: 2px solid #844eaf;
+
+}
+/*user info section end*/
+
+/*Freecodecamp Section*/
+#freecodecamp{
+    height: 100%;
     padding-top: 5px;
     font-weight: bold;
     font-size: 25px;
 }
+
+#freeCodeCampSection{
+    background: #aa57e0;
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    height: 100%;
+    border-radius: 10px;
+    border-bottom: 2px solid #844eaf;
+}
+/* freecodecamp section end*/
+
